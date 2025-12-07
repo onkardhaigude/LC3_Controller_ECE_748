@@ -1,0 +1,46 @@
+<!-- THIS IS TOOL GENERATED SESSION FILE. PLEASE DO NOT MODIFY THIS -->
+<!DOCTYPE visualizer_session>
+<session skip_do_file="0" version="3">
+ <app argc="3">
+  <argv pos="0" value="visualizer"/>
+  <argv pos="1" value="-viewcov"/>
+  <argv pos="2" value="./regress.ucdb"/>
+ </app>
+ <window_config>
+  <expanded_mode enabled="false"/>
+  <dockareas right="300" top="0" left="893" bottom="400"/>
+  <taborder bottom="transcript+coveragecovergroup+"/>
+  <activetab bottom="coveragecovergroup"/>
+  <window visible="1" undocked="0" geometry="AdnQywADAAD///lc///8m////gv///4L///5XP///Jv///4L///+C/////8AAAAABQD///lc///8m////gv///4L" windowstate="" type="transcript" dock_location="bottom"/>
+  <window visible="1" undocked="0" geometry="AdnQywADAAAAAAAAAAABLQAABP8AAAKdAAAAAAAAAS0AAAT/AAACnQAAAAAAAAAABQAAAAAAAAABLQAABP8AAAKd" windowstate="" type="coveragecovergroup" dock_location="bottom"/>
+  <window visible="1" undocked="0" geometry="AdnQywADAAAAAAAIAAAAHwAABQcAAAL3AAAACAAAAB8AAAUHAAAC9wAAAAAAAAAABQAAAAAIAAAAHwAABQcAAAL3" windowstate="AAAA/wAAAAD9AAAAAgAAAAAAAAN9AAACBfwCAAAAAfsAAAASAHMAdAByAHUAYwB0AHUAcgBlAgAAAYMAAAEbAAADfQAAAgUAAAADAAAFAAAAAZD8AQAAAAH8AAAAAAAABQAAAAB9AP////oAAAACAQAAAAP7AAAAFAB0AHIAYQBuAHMAYwByAGkAcAB0AQAAAAD/////AAAAYgD////7AAAAHgBjAG8AdgBlAHIAYQBnAGUAcwB1AG0AbQBhAHIAeQAAAAAA/////wAAAAAAAAAA+wAAACQAYwBvAHYAZQByAGEAZwBlAGMAbwB2AGUAcgBnAHIAbwB1AHABAAAAAP////8AAABiAP///wAABQAAAADtAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAMAAAAoAE0AYQBpAG4AXwBIAGkAcwB0AG8AcgB5AF8AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAJABSAFQATABfAFcAaQBuAGQAbwB3AF8AVABvAG8AbABCAGEAcgEAAAB7/////wAAAAAAAAAAAAAAIABDAG8AdgBlAHIAYQBnAGUAXwBUAG8AbwBsAEIAYQByAQAAAIn/////AAAAAAAAAAA=" type="rtl" dock_location="right"/>
+  <window visible="0" undocked="1" geometry="AdnQywADAAAAAAGDAAABGwAABP8AAAMfAAABgwAAARsAAAT/AAADHwAAAAAAAAAABQAAAAGDAAABGwAABP8AAAMf" windowstate="" type="structure"/>
+  <window visible="0" path="/mnt/ncsudrive/o/obdhaigu/748/finale/ECE748_Project3/uvmf_template_output/project_benches/lc3/tb/testbench/hdl_top.sv" undocked="0" geometry="AdnQywADAAAAAAAAAAAAAAAABPsAAADoAAAAAAAAAAAAAAT7AAAA6AAAAAAAAAAABQAAAAAAAAAAAAAABPsAAADo" firstVisibleLine="23" windowstate="" type="source" dock_location="center"/>
+  <window visible="1" id="1" path="/mnt/ncsudrive/o/obdhaigu/748/finale/ECE748_Project3/uvmf_template_output/verification_ip/interface_packages/decode_in_pkg/src/decode_in_transaction_coverage.svh" undocked="0" geometry="AdnQywADAAAAAAAAAAAAAAAABPsAAADLAAAAAAAAAAAAAAT7AAAAywAAAAAAAAAABQAAAAAAAAAAAAAABPsAAADL" firstVisibleLine="24" windowstate="" type="source" dock_location="center"/>
+  <window visible="0" undocked="0" geometry="" windowstate="" type="coveragesummary" dock_location="bottom"/>
+ </window_config>
+ <wave_file_mgr/>
+ <gui>
+  <main_window visible="1">
+   <srcbrowser instancename="hdl_top" filepath="/mnt/ncsudrive/o/obdhaigu/748/finale/ECE748_Project3/uvmf_template_output/project_benches/lc3/tb/testbench/hdl_top.sv"/>
+   <sourcetclcommands>
+    <tcl command="src activate source"/>
+    <tcl command="src top 24"/>
+   </sourcetclcommands>
+   <srcbrowser instancename="decode_in_pkg" primary="true" filepath="/mnt/ncsudrive/o/obdhaigu/748/finale/ECE748_Project3/uvmf_template_output/verification_ip/interface_packages/decode_in_pkg/src/decode_in_transaction_coverage.svh"/>
+   <sourcetclcommands>
+    <tcl command="src activate source1"/>
+    <tcl command="src top 25"/>
+   </sourcetclcommands>
+  </main_window>
+  <watchTower_cur_setting customDisplayTimeUnitListStr="" curDisplayTimeUnit="0" curRadix="8">
+   <curTime lowtime="0" hightime="0"/>
+  </watchTower_cur_setting>
+  <transcript/>
+  <coveragecovergroup/>
+ </gui>
+ <wave_mgr sync_time_range="0"/>
+ <mem_mgr/>
+ <windows/>
+ <dut selection="decode_in_pkg"/>
+</session>

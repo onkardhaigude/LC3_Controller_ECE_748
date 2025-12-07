@@ -1,0 +1,63 @@
+##
+# lc3_environment.yaml
+# UVMF environment configuration for the top-level LC3 environment.
+# This file defines agents, sub-environments and imports needed by the LC3 testbench.
+uvmf:
+  environments:
+    lc3:
+      # Top-level agents attached to this environment. These typically map to interface YAMLs.
+      agents:
+        - name: inst_mem_agent
+          type: inst_mem
+          initiator_responder: "RESPONDER"
+          # inst_mem drives and/or monitors instruction memory signals
+        - name: data_mem_agent
+          type: data_mem
+          initiator_responder: "RESPONDER"
+          # data_mem drives and/or monitors data memory signals
+
+      # Analysis components / ports can be used to hook predictor
+      analysis_components: []
+      analysis_exports: []
+      analysis_ports: []
+
+      # Import environment packages from sub-environments or local packages. These
+      # are listed here so the top-level env can reference their types and factory items.
+      imports:
+        - name: lc3_prediction_pkg # added by rdhabek: this line was not included when code was generated
+        - name: fetch_env_pkg
+        - name: decode_env_pkg
+        - name: writeback_env_pkg
+        - name: memaccess_env_pkg
+        - name: control_env_pkg
+        - name: execute_env_pkg
+
+      # Environment-level parameters and memory agents - none defined for the moment
+      parameters: []
+
+      # Scoreboards can be added here 
+      scoreboards: []
+
+      # Sub-environments — each maps to an environment package/type declared above
+      subenvs:
+        - name: fetch_env
+          type: fetch
+          parameters: []
+        - name: decode_env
+          type: decode
+          parameters: []
+        - name: writeback_env
+          type: writeback
+          parameters: []
+        - name: memaccess_env
+          type: memaccess
+          parameters: []
+        - name: control_env
+          type: control
+          parameters: []
+        - name: execute_env
+          type: execute
+          parameters: []
+
+      # TLM connections between agents/subenvs may be added here when wiring is known
+      tlm_connections: []

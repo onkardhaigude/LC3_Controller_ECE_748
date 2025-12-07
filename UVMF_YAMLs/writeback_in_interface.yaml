@@ -1,0 +1,104 @@
+uvmf:
+  interfaces:
+    writeback_in:
+      existing_library_component: 'False'
+      clock: clk
+      reset: rst
+      reset_assertion_level: 'True'
+      config_constraints: []
+      config_vars: []
+      gen_inbound_streaming_driver: 'True'
+      hdl_typedefs:
+      - name: writeback_in_control_t
+        type: enum bit[1:0] {aluout = 2'b00, memout = 2'b01, pcout = 2'b10}
+      hvl_typedefs: []
+
+      parameters: []
+      ports:
+      - dir: output
+        name: npc
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: aluout
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: pcout
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: memout
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: w_control_in
+        reset_value: '''bz'
+        width: '2'
+      - dir: output
+        name: enable_writeback
+        reset_value: '''bz'
+        width: '1'
+      - dir: output
+        name: sr1
+        reset_value: '''bz'
+        width: '3'
+      - dir: output
+        name: sr2
+        reset_value: '''bz'
+        width: '3'
+      - dir: output
+        name: dr
+        reset_value: '''bz'
+        width: '3' 
+      transaction_constraints:
+      - name: valid_control_c
+        value: '{ w_control_in inside {aluout, memout, pcout}; }'
+      transaction_vars:
+      - iscompare: 'True'
+        isrand: 'True'
+        name: w_control_in
+        type: writeback_in_control_t
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: pcout
+        type: bit [15:0]
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: memout
+        type: bit [15:0]
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: aluout
+        type: bit [15:0]
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: npc
+        type: bit [15:0]
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: enable_writeback
+        type: bit
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: dr
+        type: bit
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: sr1
+        type: bit
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'True'
+        name: sr2
+        type: bit
+        unpacked_dimension: ''
+      
+      use_dpi_link: 'False'

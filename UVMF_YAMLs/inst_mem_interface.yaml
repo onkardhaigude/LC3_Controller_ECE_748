@@ -1,0 +1,105 @@
+uvmf:
+  interfaces:
+    inst_mem:
+      # Keep names consistent with RTL (clock/reset same as SV interface)
+      clock: clock
+      reset: reset
+      reset_assertion_level: 'True'
+
+      # HDL typedefs useful for transaction shaping (inspired by project patterns)
+      hdl_typedefs:
+      - name: opcode_t
+        type: enum bit [3:0] {BR=4'b0000, ADD=4'b0001, LD=4'b0010, ST=4'b0011, AND=4'b0101, LDR=4'b0110, STR=4'b0111, LEA=4'b1110, JMP=4'b1100, NOT=4'b1001, LDI=4'b1010, STI=4'b1011}
+      - name: len16_t
+        type: bit [15:0]
+
+      hvl_typedefs: []
+
+      parameters: []
+
+      # Ports on the instruction memory interface (RTL perspective)
+      ports:
+      - dir: output
+        name: PC
+        reset_value: "'bz"
+        width: '16'
+      - dir: output
+        name: instrmem_rd
+        reset_value: "'bz"
+        width: '1'
+      - dir: input
+        name: instr_dout
+        reset_value: "'bz"
+        width: '16'
+      - dir: input
+        name: complete_instr
+        reset_value: "'bz"
+        width: '1'
+
+      # Transaction-level constraints (SV-like fragments, generator may adapt)
+      transaction_constraints:
+      - name: cp_opcode
+        value: "{ instr_dout[15:12] inside {BR, ADD, LD, ST, AND, LDR, STR, LEA, JMP, NOT, LDI, STI}; }"
+      - name: cp_nzp
+        value: "{ $countones(nzp) != 0; }"
+
+      # Transaction variables: randomizable fields and bus-state fields
+      transaction_vars:
+      - name: opcode
+        iscompare: 'False'
+        isrand: 'True'
+        type: opcode_t
+      - name: sr1
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [2:0]
+      - name: sr2
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [2:0]
+      - name: dr
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [2:0]
+      - name: mode
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit
+      - name: baser
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [2:0]
+      - name: pcoffset9
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [8:0]
+      - name: pcoffset6
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [5:0]
+      - name: imm5
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [4:0]
+      - name: nzp
+        iscompare: 'False'
+        isrand: 'True'
+        type: bit [2:0]
+
+      # Observed/bus state fields
+      - name: PC
+        iscompare: 'False'
+        isrand: 'False'
+        type: len16_t
+      - name: instrmem_rd
+        iscompare: 'False'
+        isrand: 'False'
+        type: bit
+      - name: instr_dout
+        iscompare: 'False'
+        isrand: 'True'
+        type: len16_t
+      - name: complete_instr
+        iscompare: 'False'
+        isrand: 'False'
+        type: bit

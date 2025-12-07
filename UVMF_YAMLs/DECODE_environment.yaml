@@ -1,0 +1,38 @@
+uvmf:
+  environments:
+    decode:
+      agents:
+      - name: decode_in_agent
+        type: decode_in
+      - name: decode_out_agent
+        type: decode_out
+
+      analysis_components:
+      - name: decode_pred
+        type: decode_predictor
+
+      analysis_exports: []
+      analysis_ports: []
+
+      config_constraints: []
+      config_vars: []
+
+      parameters: []
+
+      scoreboards:
+      - name: decode_scb
+        sb_type: uvmf_in_order_race_scoreboard
+        trans_type: decode_out_transaction
+
+      subenvs: []
+
+      tlm_connections:
+      - driver: decode_in_agent.monitored_ap
+        receiver: decode_pred.decode_in_agent_ae
+        validate: 'True'
+      - driver: decode_pred.decode_scb_ap
+        receiver: decode_scb.expected_analysis_export
+        validate: 'True'
+      - driver: decode_out_agent.monitored_ap
+        receiver: decode_scb.actual_analysis_export
+        validate: 'True'

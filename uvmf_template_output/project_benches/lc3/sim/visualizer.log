@@ -1,0 +1,14 @@
+# VISUALIZERROOT = '/mnt/apps/public/COE/mg_apps/questa2025.1_1/questasim/linux_x86_64/VisualizerRls'
+# USER = 'obdhaigu'
+# Siemens software version 2025.1_1 (Build on Feb 13 2025)
+# Unpublished work. Copyright 2025 Siemens
+
+# visualizer -viewcov ./regress.ucdb
+# 12:32:41: Loading coverage data...
+# 12:32:41: Loaded  coverage data
+# Window layout 'Default' saved in file: /mnt/ncsudrive/o/obdhaigu/.visualizer/layout.xml
+# Start  : Thu 04 Dec 2025 12:32:18 PM EST
+# End    : Thu 04 Dec 2025 12:33:30 PM EST
+# VMSize : 7061224 kB
+# VMPeak : 7212732 kB
+# MaxRSS : 255940 kB

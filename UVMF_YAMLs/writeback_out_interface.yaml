@@ -1,0 +1,41 @@
+uvmf:
+  interfaces:
+    writeback_out:
+      existing_library_component: 'False'
+      gen_inbound_streaming_driver: 'False'
+      clock: clk
+      reset: rst
+      reset_assertion_level: 'False'    
+      hdl_typedefs:
+        - name: writeback_out_psr_t
+          type: enum bit[2:0] {pos = 3'b001, neg = 3'b100, zero = 3'b010}
+      ports:
+        - dir: input
+          name: VSR1
+          reset_value: '''bz'
+          width: '16'
+        - dir: input
+          name: VSR2
+          reset_value: '''bz'
+          width: '16'
+        - dir: input
+          name: psr
+          reset_value: '''bz'
+          width: '3'
+      transaction_vars:
+        - iscompare: 'True'
+          isrand: 'False'
+          name: VSR1
+          type: bit [15:0]
+        - iscompare: 'True'
+          isrand: 'False'
+          name: VSR2
+          type: bit [15:0]
+        - iscompare: 'True'
+          isrand: 'False'
+          name: psr
+          type: writeback_out_psr_t
+      transaction_constraints: []
+      config_vars: []
+      config_constraints: []
+      use_dpi_link: 'False'

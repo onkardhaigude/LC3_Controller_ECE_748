@@ -1,0 +1,69 @@
+# YAML structure that defines the 'mem_access_out' interface
+uvmf:
+  # All interfaces must live underneath the 'interfaces' structure
+  interfaces:
+    # Each interface must be given a unique name
+    "memaccess_out":
+      # The name of the clock & reset are the only required
+      # elements for each interface
+      clock: "clock"
+      reset: "reset"
+      # Reset assertion level specified as True will make this
+      # interface sensitive to an active HIGH reset
+      reset_assertion_level: "True"
+      veloce_ready: "True"
+
+      # Define parameters for this interface. All classes
+      # associated with this interface will be parameterized
+      # accordingly. If no 'value' entry is provided there will
+      # be no default value for the parameter.
+      # Package-level parameters (optional examples)
+      # Typedefs (optional)
+      hdl_typedefs:
+        - name: "addr_t"
+          type: "bit [15:0]"
+        - name: "data_t"
+          type: "bit [15:0]"
+      hvl_typedefs:
+        - name: "memacc_out_item_t"
+          type: "uvm_object"
+
+      # Specify the ports associated with this interface.
+      # Direction is from the perspective of the INITIATOR/MASTER
+      # for this *output* boundary of the Mem-Access stage.
+      ports:
+        # Outgoing signals from Mem-Access toward Data Memory
+        - name: "DMem_addr"
+          width: "16"
+          dir: "output"
+        - name: "DMem_din"
+          width: "16"
+          dir: "output"
+        - name: "DMem_rd"
+          width: "1"
+          dir: "output"
+        # Stage output toward Writeback selection (for loads)
+        - name: "memout"
+          width: "16"
+          dir: "output"
+
+      # Specify transaction variables associated with this interface's
+      # desired sequence item. Each entry can be specified as random as well
+      # as part of the sequence item's compare function.
+      transaction_vars:
+        - name: "DMem_addr"
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "True"
+        - name: "DMem_din"
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "True"
+        - name: "DMem_rd"
+          type: "bit"
+          isrand: "True"
+          iscompare: "True"
+        - name: "memout"        # stage’s selected data toward WB (e.g., loads)
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "True"

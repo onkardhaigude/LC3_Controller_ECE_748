@@ -1,0 +1,10 @@
+uvmf:
+  util_components:
+    memaccess_coverage:
+      analysis_exports:
+      - name: memaccess_in_ae
+        type: memaccess_in_transaction
+      - name: memaccess_out_ae
+        type: memaccess_out_transaction
+      existing_library_component: 'True'
+      type: coverage

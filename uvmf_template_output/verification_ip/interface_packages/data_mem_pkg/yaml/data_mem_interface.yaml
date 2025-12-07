@@ -1,0 +1,71 @@
+uvmf:
+  interfaces:
+    data_mem:
+      clock: clock
+      config_constraints: []
+      config_vars: []
+      existing_library_component: 'True'
+      gen_inbound_streaming_driver: 'False'
+      hdl_pkg_parameters: []
+      hdl_typedefs:
+      - name: len16_t
+        type: bit [15:0]
+      hvl_pkg_parameters: []
+      hvl_typedefs: []
+      parameters: []
+      ports:
+      - dir: input
+        name: complete_data
+        reset_value: '''bz'
+        width: '1'
+      - dir: input
+        name: Data_dout
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: Data_din
+        reset_value: '''bz'
+        width: '16'
+      - dir: output
+        name: Data_rd
+        reset_value: '''bz'
+        width: '1'
+      - dir: output
+        name: Data_addr
+        reset_value: '''bz'
+        width: '16'
+      reset: reset
+      reset_assertion_level: 'True'
+      transaction_constraints: []
+      transaction_vars:
+      - comment: Signal for data completion
+        iscompare: 'False'
+        isrand: 'False'
+        name: complete_data
+        type: bit
+        unpacked_dimension: ''
+      - comment: Data output from memory
+        iscompare: 'False'
+        isrand: 'True'
+        name: Data_dout
+        type: len16_t
+        unpacked_dimension: ''
+      - comment: Data input to memory
+        iscompare: 'False'
+        isrand: 'False'
+        name: Data_din
+        type: len16_t
+        unpacked_dimension: ''
+      - comment: Read enable signal
+        iscompare: 'False'
+        isrand: 'False'
+        name: Data_rd
+        type: bit
+        unpacked_dimension: ''
+      - comment: Address for memory access
+        iscompare: 'False'
+        isrand: 'False'
+        name: Data_addr
+        type: len16_t
+        unpacked_dimension: ''
+      use_dpi_link: 'False'

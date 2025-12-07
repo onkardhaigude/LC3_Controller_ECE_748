@@ -1,0 +1,143 @@
+uvmf:
+  interfaces:
+    execute_in:
+      clock: clock
+      reset: reset
+      reset_assertion_level: 'True'
+
+      # DUT’s execute stage receives these inputs from the Decode/Bypass stage
+      ports:
+        - name: E_Control
+          dir: input
+          width: '6'
+          reset_value: '''b0'
+
+        - name: IR
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+
+        - name: npc_in
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+
+        - name: bypass_alu_1
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: bypass_alu_2
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: bypass_mem_1
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: bypass_mem_2
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: VSR1
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+
+        - name: VSR2
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+
+        - name: W_Control_in
+          dir: input
+          width: '2'
+          reset_value: '''b0'
+
+        - name: Mem_Control_in
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: enable_execute
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+        - name: Mem_Bypass_Val
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+
+      # Minimal transaction-level variables — enough for randomization and comparison
+      transaction_vars:
+        - name: E_Control
+          type: "bit [5:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: IR
+          type: "bit [15:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: npc_in
+          type: "bit [15:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: bypass_alu_1
+          type: "bit"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: bypass_alu_2
+          type: "bit"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: bypass_mem_1
+          type: "bit"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: bypass_mem_2
+          type: "bit"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: VSR1
+          type: "bit [15:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: VSR2
+          type: "bit [15:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: W_Control_in
+          type: "bit [1:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: Mem_Control_in
+          type: "bit"
+          isrand: 'True'
+          iscompare: 'True'
+
+        - name: enable_execute
+          type: "bit"
+          isrand: 'False'
+          iscompare: 'True'
+
+        - name: Mem_Bypass_Val
+          type: "bit [15:0]"
+          isrand: 'True'
+          iscompare: 'True'
+
+      use_dpi_link: 'False'
+

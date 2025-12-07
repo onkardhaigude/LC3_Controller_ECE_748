@@ -1,0 +1,43 @@
+uvmf:
+  interfaces:
+    fetch_out:
+      clock: clock
+      reset: reset
+      reset_assertion_level: 'True'
+      config_constraints: []
+      config_vars: []
+      gen_inbound_streaming_driver: 'False'  # Output interface - no driver needed
+      hdl_typedefs: []
+      hvl_typedefs: []
+      parameters: []
+      ports:
+      - dir: input
+        name: instrmem_rd
+        reset_value: "1'bz"
+        width: '1'
+      - dir: input
+        name: pc
+        reset_value: "16'h3000"
+        width: '16'
+      - dir: input
+        name: npc
+        reset_value: "16'h3001"
+        width: '16'
+      transaction_constraints: []
+      transaction_vars:
+      # All outputs from FETCH - monitor will capture these
+      - iscompare: 'True'
+        isrand: 'False'
+        name: instrmem_rd
+        type: bit
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'False'
+        name: pc
+        type: bit [15:0]
+        unpacked_dimension: ''
+      - iscompare: 'True'
+        isrand: 'False'
+        name: npc
+        type: bit [15:0]
+        unpacked_dimension: ''

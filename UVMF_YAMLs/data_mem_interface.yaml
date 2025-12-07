@@ -1,0 +1,72 @@
+##
+# data_mem_interface.yaml
+# UVMF interface configuration for LC3 data memory interface
+# This file defines the interface, ports, types, and transaction variables for the data memory bus.
+uvmf:
+  interfaces:
+    data_mem:
+      # Clock and reset signals for the interface
+      clock: clock
+      reset: reset
+      reset_assertion_level: 'True'  # Active high reset
+
+      # Define a 16-bit len16_t type for memory data/address
+      hdl_typedefs:
+        - name: len16_t
+          type: bit [15:0]
+      hvl_typedefs: []  # No extra HVL typedefs
+
+      parameters: []  # No extra parameters
+
+      # Port definitions for the data memory interface
+      ports:
+        - name: complete_data
+          dir: input
+          width: '1'
+          reset_value: '''bz'  # High-impedance on reset
+        - name: Data_dout
+          dir: input
+          width: '16'
+          reset_value: '''bz'
+        - name: Data_din
+          dir: output
+          width: '16'
+          reset_value: '''bz'
+        - name: Data_rd
+          dir: output
+          width: '1'
+          reset_value: '''bz'
+        - name: Data_addr
+          dir: output
+          width: '16'
+          reset_value: '''bz'
+
+      # Transaction variables for sequence item
+      transaction_vars:
+        - name: complete_data
+          type: bit
+          isrand: 'False'
+          iscompare: 'False'
+          comment: 'Signal for data completion'
+        - name: Data_dout
+          type: len16_t
+          isrand: 'True'  # Randomized for stimulus
+          iscompare: 'False'
+          comment: 'Data output from memory'
+        - name: Data_din
+          type: len16_t
+          isrand: 'False'
+          iscompare: 'False'
+          comment: 'Data input to memory'
+        - name: Data_rd
+          type: bit
+          isrand: 'False'
+          iscompare: 'False'
+          comment: 'Read enable signal'
+        - name: Data_addr
+          type: len16_t
+          isrand: 'False'
+          iscompare: 'False'
+          comment: 'Address for memory access'
+
+      transaction_constraints: []  # No additional constraints

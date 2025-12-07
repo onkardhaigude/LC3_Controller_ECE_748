@@ -1,0 +1,86 @@
+uvmf:
+  environments:
+    "memaccess":
+      ## Agents are defined in a LIST so that the order is maintained.
+      ## This order MUST match the bench 'interface_names' list passed to initialize().
+      agents:
+        - name: "memaccess_in_agent"
+          type: "memaccess_in"     # interface/agent TYPE (input-side)
+          initiator_responder: "RESPONDER"  # monitoring the DUT → MemAccess inputs
+        - name: "memaccess_out_agent"
+          type: "memaccess_out"    # interface/agent TYPE (output-side)
+          initiator_responder: "RESPONDER"  # monitoring MemAccess → ext path
+
+      ## Analysis components (utilities) instantiated inside the env
+      analysis_components:
+        - name: "memacc_pred"
+          type: "memaccess_predictor"
+        - name: "memacc_cov"
+          type: "memaccess_coverage"
+
+      ## Single simple in-order scoreboard (compare expected vs actual at the OUT boundary)
+      scoreboards:
+        - name: "memacc_sb"
+          sb_type: "uvmf_in_order_race_scoreboard"
+          trans_type: "memaccess_out_transaction"
+
+      ## Expose convenient env-level analysis ports (optional but handy)
+      analysis_ports:
+        - name: "memaccess_in_ap"
+          trans_type: "memaccess_in_transaction"
+          connected_to: "memaccess_in_agent.monitored_ap"
+        - name: "memaccess_out_ap"
+          trans_type: "memaccess_out_transaction"
+          connected_to: "memaccess_out_agent.monitored_ap"
+
+      ## (Optional) accept expected transactions from outside, if needed
+      # analysis_exports:
+      #   - name: "external_expected_out_ep"
+      #     trans_type: "memaccess_out_transaction"
+      #     connected_to: "memacc_sb.expected_analysis_export"
+
+      ## Internal TLM connections:
+      ##   IN.agent.mon_ap  -> predictor (build expected OUT)
+      ##   predictor.exp_ap -> scoreboard.expected
+      ##   OUT.agent.mon_ap -> scoreboard.actual
+      ##   IN.agent.mon_ap  -> coverage
+      ##   OUT.agent.mon_ap -> coverage
+      tlm_connections:
+        # 0) IN → Predictor (to derive expected OUT behavior)
+        - driver:   "memaccess_in_agent.monitored_ap"
+          receiver: "memacc_pred.memaccess_in_ae"
+
+        # 1) Predictor → Scoreboard.expected
+        - driver:   "memacc_pred.memaccess_out_sb_ap"
+          receiver: "memacc_sb.expected_analysis_export"
+
+        # 2) OUT (actual) → Scoreboard.actual
+        - driver:   "memaccess_out_agent.monitored_ap"
+          receiver: "memacc_sb.actual_analysis_export"
+
+        # 3) IN → Coverage
+        - driver:   "memaccess_in_agent.monitored_ap"
+          receiver: "memacc_cov.memaccess_in_ae"
+
+        # 4) OUT → Coverage
+        - driver:   "memaccess_out_agent.monitored_ap"
+          receiver: "memacc_cov.memaccess_out_ae"
+
+      ## (Optional) env-level config vars/constraints—kept minimal here
+      #config_vars:
+      #  - name: "enable_time_checks"
+      #    type: "bit"
+      #    isrand: "False"
+      #    value: "1"
+      #config_constraints:
+      #  - name: "legal_cfg_c"
+      #    value: "{ enable_time_checks inside {0,1}; }"
+
+      ## Example per-agent config values (match your agent type’s generated cfg fields)
+      #config_variable_values:
+      #  - name: "memaccess_in_agent_config.transfer_gap"
+      #    value: "0"
+      #  - name: "memaccess_out_agent_config.transfer_gap"
+      #    value: "0"
+      imports:
+        - name: lc3_prediction_pkg

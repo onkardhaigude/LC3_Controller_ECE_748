@@ -1,0 +1,114 @@
+uvmf:
+  interfaces:
+    execute_out:
+      clock: clock
+      reset: reset
+      reset_assertion_level: 'True'
+
+      # Standard UVMF metadata
+      existing_library_component: 'False'
+      gen_inbound_streaming_driver: 'False'
+      use_dpi_link: 'False'
+
+      # Optional placeholders
+      config_constraints: []
+      config_vars: []
+      transaction_constraints: []
+      hdl_pkg_parameters: []
+      hvl_pkg_parameters: []
+      hvl_typedefs: []
+      parameters: []
+
+      # Port definitions (inputs from execute stage)
+      ports:
+        - name: W_Control_out
+          dir: input
+          width: '2'
+          reset_value: '''b0'
+        - name: Mem_Control_out
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+        - name: aluout
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+        - name: pcout
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+        - name: dr
+          dir: input
+          width: '3'
+          reset_value: '''b0'
+        - name: sr1
+          dir: input
+          width: '3'
+          reset_value: '''b0'
+        - name: sr2
+          dir: input
+          width: '3'
+          reset_value: '''b0'
+        - name: IR_Exec
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+        - name: NZP
+          dir: input
+          width: '3'
+          reset_value: '''b0'
+        - name: M_Data
+          dir: input
+          width: '16'
+          reset_value: '''b0'
+        - name: enable_execute_out
+          dir: input
+          width: '1'
+          reset_value: '''b0'
+
+      # Transaction variables — mirror the interface ports
+      transaction_vars:
+        - name: W_Control_out
+          type: bit [1:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: Mem_Control_out
+          type: bit
+          isrand: 'True'
+          iscompare: 'True'
+        - name: aluout
+          type: bit [15:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: pcout
+          type: bit [15:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: dr
+          type: bit [2:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: sr1
+          type: bit [2:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: sr2
+          type: bit [2:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: IR_Exec
+          type: bit [15:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: NZP
+          type: bit [2:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: M_Data
+          type: bit [15:0]
+          isrand: 'True'
+          iscompare: 'True'
+        - name: enable_execute_out
+          type: bit
+          isrand: 'True'
+          iscompare: 'True'

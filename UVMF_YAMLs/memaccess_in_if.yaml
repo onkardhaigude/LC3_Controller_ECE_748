@@ -1,0 +1,79 @@
+# YAML structure that defines the 'mem_access_in' interface
+uvmf:
+  # All interfaces must live underneath the 'interfaces' structure
+  interfaces:
+    # Each interface must be given a unique name
+    "memaccess_in":
+      # The name of the clock & reset are the only required
+      # elements for each interface
+      clock: "clock"
+      reset: "reset"
+      # Reset assertion level specified as True will make this
+      # interface sensitive to an active HIGH reset
+      reset_assertion_level: "True"
+      veloce_ready: "True"
+
+      # Define parameters for this interface. All classes
+      # associated with this interface will be parameterized
+      # accordingly. If no 'value' entry is provided there will
+      # be no default value for the parameter. 
+
+      # Package-level parameters. Will be defined in the HVL or HDL
+      # file depending on where they are placed. (Optional; examples left generic)
+
+      # Typedefs are also defined in the HDL or HVL package
+      # depending on where they are placed (Optional)
+      hdl_typedefs:
+        - name: "addr_t"
+          type: "bit [15:0]"
+        - name: "data_t"
+          type: "bit [15:0]"
+      hvl_typedefs:
+        - name: "memacc_in_item_t"
+          type: "uvm_object"
+
+      # Specify the ports associated with this interface. The
+      # direction is from the perspective of the INITIATOR or MASTER.
+      # Since this is the *input* side of Mem-Access (what the stage receives),
+      # these are modeled as inputs to the INITIATOR (i.e., driven by the DUT).
+      ports:
+        - name: "M_Addr"       # address into data memory path (from Execute/pcout)
+          width: "16"
+          dir: "input"
+        - name: "M_Data"       # store data from Execute
+          width: "16"
+          dir: "input"
+        - name: "M_Control"    # control/indirect addressing selector for Mem stage
+          width: "1"
+          dir: "input"
+        - name: "mem_state"    # controller's memory sub-state (e.g., idle/req/wait/complete)
+          width: "2"
+          dir: "input"
+        - name: "DMem_dout"    # controller's memory sub-state (e.g., idle/req/wait/complete)
+          width: "16"
+          dir: "input"
+
+      # Specify transaction variables associated with this interface's
+      # desired sequence item. Each entry can be specified as random as well
+      # as something to be used as part of the sequence item's compare function.
+      transaction_vars:
+        - name: "m_addr"
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "False"
+        - name: "m_data"
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "False"
+        - name: "m_control"
+          type: "bit"
+          isrand: "True"
+          iscompare: "False"
+        - name: "mem_state"
+          type: "bit [1:0]"
+          isrand: "True"
+          iscompare: "False"
+        - name: "DMem_dout"  
+          type: "bit [15:0]"
+          isrand: "True"
+          iscompare: "False"

@@ -1,0 +1,10 @@
+uvmf:
+  util_components:
+    execute_coverage:
+      analysis_exports:
+      - name: execute_in_ae
+        type: execute_in_transaction
+      - name: execute_out_ae
+        type: execute_out_transaction
+      existing_library_component: 'True'
+      type: coverage

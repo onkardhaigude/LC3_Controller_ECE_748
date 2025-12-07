@@ -1,0 +1,2 @@
+var g_data = {"186":{"pr":"/decode_in_pkg","ty":2,"dui":47,"dun":"work.decode_in_pkg","cvgs":[{"h":["decode_in_transaction_cg_uvm_test_top.environment.decode_env.decode_in_agent.decode_in_agent_coverage",2,1,204,187],"cov":[682,682,100.00],"opts":{"goal":"100","per_instance":"true","auto_bin_max":"1024"}},{"h":["/decode_in_pkg/decode_in_transaction_coverage/decode_in_transaction_cg",1,1,187],"cov":[682,682,100.00],"opts":{"goal":"100","merge_instance":"auto(true)"}}]}};
+processCovergroupsData(g_data);

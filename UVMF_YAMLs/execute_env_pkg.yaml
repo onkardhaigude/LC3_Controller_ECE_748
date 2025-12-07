@@ -1,0 +1,68 @@
+uvmf:
+  environments:
+    execute:
+      agents:
+        - initiator_responder: INITIATOR
+          name: execute_in_agent
+          type: execute_in
+        - initiator_responder: RESPONDER
+          name: execute_out_agent
+          type: execute_out
+
+      analysis_components:
+        - name: execute_pred
+          parameters: []
+          type: execute_predictor
+        - name: execute_cov
+          parameters: []
+          type: execute_coverage
+
+      analysis_exports: []
+
+      analysis_ports:
+        - connected_to: execute_in_agent.monitored_ap
+          name: execute_in_ap
+          trans_type: execute_in_transaction
+        - connected_to: execute_out_agent.monitored_ap
+          name: execute_out_ap
+          trans_type: execute_out_transaction
+
+      config_constraints: []
+      config_vars: []
+      existing_library_component: 'False'
+      hvl_pkg_parameters: []
+      non_uvmf_components: []
+      parameters: []
+      qvip_memory_agents: []
+
+      scoreboards:
+        - name: execute_sb
+          sb_type: uvmf_in_order_race_scoreboard
+          trans_type: execute_out_transaction
+
+      subenvs: []
+
+      tlm_connections:
+        # Predictor connections
+        - driver: execute_in_agent.monitored_ap
+          receiver: execute_pred.execute_in_ae
+          validate: 'True'
+
+        - driver: execute_pred.execute_out_sb_ap
+          receiver: execute_sb.expected_analysis_export
+          validate: 'True'
+
+        - driver: execute_out_agent.monitored_ap
+          receiver: execute_sb.actual_analysis_export
+          validate: 'True'
+
+        # Coverage connections
+        - driver: execute_in_agent.monitored_ap
+          receiver: execute_cov.execute_in_ae
+          validate: 'True'
+
+        - driver: execute_out_agent.monitored_ap
+          receiver: execute_cov.execute_out_ae
+          validate: 'True'
+      imports:
+        - name: lc3_prediction_pkg
